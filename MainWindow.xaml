@@ -1,0 +1,23 @@
+﻿<Window
+    x:Class="WpfApp1_WatchingKeys.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfApp1_WatchingKeys"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Deactivated="Window_Deactivated"
+    Width="800"
+    Height="450"
+    Background="DarkGoldenrod"
+    PreviewKeyDown="Grid_PreviewKeyDown"
+    mc:Ignorable="d">
+    <ScrollViewer x:Name="Scroller">
+        <TextBlock
+            x:Name="MainTextBlock"
+            d:Text="Test test this is only a test"
+            FontSize="28"
+            FontWeight="Bold"
+            Foreground="AliceBlue" />
+    </ScrollViewer>
+</Window>
