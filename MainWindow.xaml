@@ -10,6 +10,7 @@
     Width="800"
     Height="450"
     Background="DarkGoldenrod"
+    KeyUp="Window_KeyUp"
     PreviewKeyDown="Grid_PreviewKeyDown"
     mc:Ignorable="d">
     <ScrollViewer x:Name="Scroller">

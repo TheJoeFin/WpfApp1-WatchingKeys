@@ -15,10 +15,14 @@ public partial class MainWindow : Window
     }
 
     string previousSequence = string.Empty;
+    bool HasModifier = false;
+    bool hasLetter = false;
 
     private void Grid_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         e.Handled = true;
+        MainTextBlock.Text = string.Empty;
+
         IEnumerable<Key> downKeys = GetDownKeys();
 
         bool containsWin = downKeys.Contains(Key.LWin) || downKeys.Contains(Key.RWin);
@@ -28,7 +32,10 @@ public partial class MainWindow : Window
 
         IEnumerable<Key> justLetterKeys = RemoveModifierKeys(downKeys);
 
-        if (!justLetterKeys.Any() || !(containsWin || containsShift || containsCtrl || containsAlt))
+        hasLetter = justLetterKeys.Any();
+        HasModifier = containsWin || containsShift || containsCtrl || containsAlt;
+
+        if (!(hasLetter && HasModifier))
             return;
 
         List<string> keyStrings = [];
@@ -116,9 +123,20 @@ public partial class MainWindow : Window
 
     private void Window_Deactivated(object sender, EventArgs e)
     {
+        MainTextBlock.Text = string.Empty;
         MainTextBlock.Text += Environment.NewLine;
         MainTextBlock.Text += "Lost focus?";
         MainTextBlock.Text += Environment.NewLine;
         MainTextBlock.Text += "Maybe that shortcut is taken";
+    }
+
+    private void Window_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (hasLetter && HasModifier)
+            return;
+
+        MainTextBlock.Text = string.Empty;
+        MainTextBlock.Text += Environment.NewLine;
+        MainTextBlock.Text += "Not valid command. Need to include a modifier and a letter";
     }
 }
